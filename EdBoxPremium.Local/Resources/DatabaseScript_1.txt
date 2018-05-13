@@ -1,0 +1,11 @@
+USE [master];
+GO
+SET QUOTED_IDENTIFIER OFF 
+CREATE DATABASE [{dbLocation}\EdboxDb.mdf]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'EdboxDb', FILENAME = N'{dbLocation}\EdboxDb.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'EdboxDb_log', FILENAME = N'{dbLocation}\EdboxDb.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB );
+
+ALTER DATABASE [{dbLocation}\EdboxDb.mdf] SET READ_WRITE WITH NO_WAIT;

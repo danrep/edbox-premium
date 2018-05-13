@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Authentication";
+    Layout = "~/Views/Shared/_External.cshtml";
+}
+
+<div class="login-content">
+    <form class="margin-bottom-0">
+        <div class="form-group m-b-20">
+            <input type="text" id="username" class="form-control input-lg" placeholder="Email Address" required />
+        </div>
+        <div class="form-group m-b-20">
+            <input type="password" id="password" class="form-control input-lg" placeholder="Password" required />
+        </div>
+        <div class="login-buttons">
+            <button type="button" onclick="logIn()" class="btn btn-success btn-block btn-lg">Sign me in</button>
+        </div>
+        <hr />
+        <div class="m-t-20">
+            <h2 style="color: #51b74b">
+                <img src="/assets/img/EdBoxPremium/school_logo.png" width="120" alt="logo">
+            </h2>
+            <span>powered by Cloud Portal Limited</span>
+        </div>
+    </form>
+</div>
+
+<script>
+    function logIn() {
+        if ($('#username').val() === "") {
+            window.swalWarning('Please Enter a Username');
+            return false;
+        }
+
+        if ($('#password').val() === "") {
+            window.swalWarning('Please Enter a Password');
+            return false;
+        }
+
+        window.api("GET", "@Url.Action("LogIn", "Home", new {area=""})?username=" + $('#username').val() + "&password=" + $('#password').val(),
+            null,
+            true,
+            processLogIn,
+            true
+        );
+
+        return false;
+    };
+
+    function processLogIn() {
+        window.location = '@Url.Action("Index", "EdBoxCentral", new {area = ""})';
+    }
+</script>

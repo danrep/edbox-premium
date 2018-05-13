@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EdboxDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="School_Attendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentMatricNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentTagId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateRecorded" Type="datetime" Nullable="false" />
+          <Property Name="AttendanceSessionId" Type="bigint" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="School_AttendanceSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="AcademicPeriodId" Type="int" Nullable="false" />
+          <Property Name="AttendanceFunctionId" Type="int" Nullable="false" />
+          <Property Name="AttendanceDescription" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateRecorded" Type="datetime" Nullable="false" />
+          <Property Name="UserRecorded" Type="int" Nullable="false" />
+          <Property Name="IsUploaded" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="AttendanceSessionGuid" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Student_ProfileData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MatricNumber" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TagId" Type="varchar" MaxLength="100" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Picture" Type="varchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="StudentProfileData" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="System_Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SettingKey" Type="int" Nullable="false" />
+          <Property Name="SettingValue" Type="varchar(max)" Nullable="false" />
+          <Property Name="SettingDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EdboxDbModelStoreContainer">
+          <EntitySet Name="School_Attendance" EntityType="Self.School_Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="School_AttendanceSession" EntityType="Self.School_AttendanceSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_ProfileData" EntityType="Self.Student_ProfileData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="System_Setting" EntityType="Self.System_Setting" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EdboxDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LocalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="School_Attendance" EntityType="EdboxDbModel.School_Attendance" />
+          <EntitySet Name="School_AttendanceSession" EntityType="EdboxDbModel.School_AttendanceSession" />
+          <EntitySet Name="Student_ProfileData" EntityType="EdboxDbModel.Student_ProfileData" />
+          <EntitySet Name="System_Setting" EntityType="EdboxDbModel.System_Setting" />
+        </EntityContainer>
+        <EntityType Name="School_Attendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentMatricNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StudentTagId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateRecorded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AttendanceSessionId" Type="Int64" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="School_AttendanceSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="AcademicPeriodId" Type="Int32" Nullable="false" />
+          <Property Name="AttendanceFunctionId" Type="Int32" Nullable="false" />
+          <Property Name="AttendanceDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateRecorded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserRecorded" Type="Int32" Nullable="false" />
+          <Property Name="IsUploaded" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="AttendanceSessionGuid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Student_ProfileData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MatricNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TagId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="StudentProfileData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="System_Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SettingKey" Type="Int32" Nullable="false" />
+          <Property Name="SettingValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SettingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EdboxDbModelStoreContainer" CdmEntityContainer="LocalEntities">
+          <EntitySetMapping Name="School_Attendance">
+            <EntityTypeMapping TypeName="EdboxDbModel.School_Attendance">
+              <MappingFragment StoreEntitySet="School_Attendance">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="AttendanceSessionId" ColumnName="AttendanceSessionId" />
+                <ScalarProperty Name="DateRecorded" ColumnName="DateRecorded" />
+                <ScalarProperty Name="StudentTagId" ColumnName="StudentTagId" />
+                <ScalarProperty Name="StudentMatricNumber" ColumnName="StudentMatricNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="School_AttendanceSession">
+            <EntityTypeMapping TypeName="EdboxDbModel.School_AttendanceSession">
+              <MappingFragment StoreEntitySet="School_AttendanceSession">
+                <ScalarProperty Name="AttendanceSessionGuid" ColumnName="AttendanceSessionGuid" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsUploaded" ColumnName="IsUploaded" />
+                <ScalarProperty Name="UserRecorded" ColumnName="UserRecorded" />
+                <ScalarProperty Name="DateRecorded" ColumnName="DateRecorded" />
+                <ScalarProperty Name="AttendanceDescription" ColumnName="AttendanceDescription" />
+                <ScalarProperty Name="AttendanceFunctionId" ColumnName="AttendanceFunctionId" />
+                <ScalarProperty Name="AcademicPeriodId" ColumnName="AcademicPeriodId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_ProfileData">
+            <EntityTypeMapping TypeName="EdboxDbModel.Student_ProfileData">
+              <MappingFragment StoreEntitySet="Student_ProfileData">
+                <ScalarProperty Name="StudentProfileData" ColumnName="StudentProfileData" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="MatricNumber" ColumnName="MatricNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="System_Setting">
+            <EntityTypeMapping TypeName="EdboxDbModel.System_Setting">
+              <MappingFragment StoreEntitySet="System_Setting">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="SettingDate" ColumnName="SettingDate" />
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingKey" ColumnName="SettingKey" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

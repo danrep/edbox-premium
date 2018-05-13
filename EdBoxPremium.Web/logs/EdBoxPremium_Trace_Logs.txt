@@ -1,0 +1,26 @@
+[INFO] 5/13/2018 2:06:44 PM: Upload of Live Data for FCE Panshikin.xls Started. Tracking ID: 37c48840-8c4b-4c41-b950-c2d81884afe9
+[ERROR>>System] 5/13/2018 2:16:32 PM: [System.ArgumentNullException: Value cannot be null.
+Parameter name: address
+   at System.Net.WebClient.DownloadString(String address)
+   at EdBoxPremium.Core.Messaging.SendMail(String destination, String ccDestination, String bccDestination, String messageHeading, String message, String attachments) in C:\Users\Arigbede Moses\Documents\Visual Studio 2017\Projects\EdBoxPremium\EdBoxPremium.Core\Messaging.cs:line 64]Value cannot be null.
+Parameter name: address
+[ERROR>>System] 5/13/2018 2:17:50 PM: [System.ArgumentNullException: Value cannot be null.
+Parameter name: address
+   at System.Net.WebClient.DownloadString(String address)
+   at EdBoxPremium.Core.Messaging.SendMail(String destination, String ccDestination, String bccDestination, String messageHeading, String message, String attachments)]Value cannot be null.
+Parameter name: address
+[ERROR>>mscorlib] 5/13/2018 2:18:02 PM: [System.ArgumentException: The path is not of a legal form.
+   at System.IO.Path.LegacyNormalizePath(String path, Boolean fullCheck, Int32 maxPathLength, Boolean expandShortPaths)
+   at System.IO.Path.NormalizePath(String path, Boolean fullCheck, Int32 maxPathLength, Boolean expandShortPaths)
+   at System.IO.Path.GetFullPathInternal(String path)
+   at System.Net.WebClient.GetUri(String path)
+   at System.Net.WebClient.DownloadString(String address)
+   at EdBoxPremium.Core.Messaging.SendMail(String destination, String ccDestination, String bccDestination, String messageHeading, String message, String attachments)]The path is not of a legal form.
+[ERROR>>mscorlib] 5/13/2018 2:19:02 PM: [System.ArgumentException: The path is not of a legal form.
+   at System.IO.Path.LegacyNormalizePath(String path, Boolean fullCheck, Int32 maxPathLength, Boolean expandShortPaths)
+   at System.IO.Path.NormalizePath(String path, Boolean fullCheck, Int32 maxPathLength, Boolean expandShortPaths)
+   at System.IO.Path.GetFullPathInternal(String path)
+   at System.Net.WebClient.GetUri(String path)
+   at System.Net.WebClient.DownloadString(String address)
+   at EdBoxPremium.Core.Messaging.SendMail(String destination, String ccDestination, String bccDestination, String messageHeading, String message, String attachments)]The path is not of a legal form.
+[INFO] 5/13/2018 2:20:17 PM: Upload of Live Data for FCE Panshikin.xls Completed. Tracking ID: 37c48840-8c4b-4c41-b950-c2d81884afe9
