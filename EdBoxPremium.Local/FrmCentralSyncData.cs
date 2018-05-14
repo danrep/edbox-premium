@@ -101,6 +101,7 @@ namespace EdBoxPremium.Local
                                 LastName = innerList.LastName, 
                                 Sex = innerList.Sex,
                                 Picture = innerList.Picture, 
+                                PictureEncoded = string.IsNullOrEmpty(innerList.Picture) ? null : Convert.FromBase64String(innerList.Picture),
                                 StudentProfileData = Newtonsoft.Json.JsonConvert.SerializeObject(innerList)
                             }));
                             data.SaveChanges();

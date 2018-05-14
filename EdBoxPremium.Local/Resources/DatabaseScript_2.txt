@@ -132,6 +132,7 @@ CREATE TABLE [dbo].[Student_ProfileData](
 	[Phone] [varchar](20) NOT NULL,
 	[Email] [varchar](50) NULL,
 	[Picture] [varchar](max) NULL,
+    [PictureEncoded] Image NULL,
 	[IsDeleted] [bit] NOT NULL,
 	[StudentProfileData] [varchar](max) NULL,
 PRIMARY KEY CLUSTERED 

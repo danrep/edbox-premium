@@ -14,8 +14,6 @@ namespace EdBoxPremium.Local.Engines
     public class DatabaseManager
     {
         private static UpdateSpec _updateSpec;
-        private static List<School_Course> _schoolCourse;
-        private static AcademicSetUpData _academicSetUpDatas;
         private static AuthModel _authModel;
 
         public static void IntializeDataStoreEngine()
@@ -93,29 +91,29 @@ namespace EdBoxPremium.Local.Engines
 
         public static List<School_Course> SchoolCourse
         {
-            get => _schoolCourse;
+            get
+            {
+                var updateSpecFileLocation = Path.Combine(OutputFolder, "LocalData\\SchoolCourse.json");
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<School_Course>>(File.ReadAllText(updateSpecFileLocation));
+            }
             set
             {
-                var outputFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-                var updateSpecFileLocation = Path.Combine(outputFolder, "LocalData\\SchoolCourse.json");
-
-                var jsonValue = Newtonsoft.Json.JsonConvert.SerializeObject(value);
-                File.WriteAllText(updateSpecFileLocation, jsonValue);
-                _schoolCourse = value;
+                var updateSpecFileLocation = Path.Combine(OutputFolder, "LocalData\\SchoolCourse.json");
+                File.WriteAllText(updateSpecFileLocation, Newtonsoft.Json.JsonConvert.SerializeObject(value));
             }
         }
 
         public static AcademicSetUpData AcademicSetUpData
         {
-            get => _academicSetUpDatas;
+            get
+            {
+                var updateSpecFileLocation = Path.Combine(OutputFolder, "LocalData\\AcademicSetUpData.json");
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<AcademicSetUpData>(File.ReadAllText(updateSpecFileLocation));
+            }
             set
             {
-                var outputFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-                var updateSpecFileLocation = Path.Combine(outputFolder, "LocalData\\AcademicSetUpData.json");
-
-                var jsonValue = Newtonsoft.Json.JsonConvert.SerializeObject(value);
-                File.WriteAllText(updateSpecFileLocation, jsonValue);
-                _academicSetUpDatas = value;
+                var updateSpecFileLocation = Path.Combine(OutputFolder, "LocalData\\AcademicSetUpData.json");
+                File.WriteAllText(updateSpecFileLocation, Newtonsoft.Json.JsonConvert.SerializeObject(value));
             }
         }
 
@@ -123,23 +121,13 @@ namespace EdBoxPremium.Local.Engines
         {
             get
             {
-                var outputFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-                var updateSpecFileLocation = Path.Combine(outputFolder, "LocalData\\DefaultCredentials.json");
+                var updateSpecFileLocation = Path.Combine(OutputFolder, "LocalData\\DefaultCredentials.json");
                 return Newtonsoft.Json.JsonConvert.DeserializeObject<List<AuthModel>>(File.ReadAllText(updateSpecFileLocation));
             }
             set
             {
-                try
-                {
-
-                    var outputFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-                    var updateSpecFileLocation = Path.Combine(outputFolder, "LocalData\\DefaultCredentials.json");
-                    File.WriteAllText(updateSpecFileLocation, Newtonsoft.Json.JsonConvert.SerializeObject(value));
-                }
-                catch
-                {
-                    //
-                }
+                var updateSpecFileLocation = Path.Combine(OutputFolder, "LocalData\\DefaultCredentials.json");
+                File.WriteAllText(updateSpecFileLocation, Newtonsoft.Json.JsonConvert.SerializeObject(value));
             }
         }
 
@@ -148,6 +136,8 @@ namespace EdBoxPremium.Local.Engines
             get => _authModel;
             set => _authModel = value;
         }
+
+        private static string OutputFolder => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
         #region Database Engine
 

@@ -25,5 +25,6 @@ namespace EdBoxPremium.Local
         public string Picture { get; set; }
         public bool IsDeleted { get; set; }
         public string StudentProfileData { get; set; }
+        public byte[] PictureEncoded { get; set; }
     }
 }

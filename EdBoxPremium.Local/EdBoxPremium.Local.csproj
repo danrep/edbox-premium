@@ -249,7 +249,6 @@
     <Content Include="EdboxDb.mdf" />
     <Content Include="EdboxDb_log.ldf">
       <DependentUpon>EdboxDb.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="LocalEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
