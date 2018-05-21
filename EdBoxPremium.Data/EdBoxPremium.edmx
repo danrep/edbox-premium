@@ -99,6 +99,7 @@
           <Property Name="Sex" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="100" />
           <Property Name="Picture" Type="varchar(max)" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
@@ -252,6 +253,7 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="BloodGroup" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="School_Course">
           <Key>
@@ -375,6 +377,7 @@
           <EntitySetMapping Name="Student_ProfileData">
             <EntityTypeMapping TypeName="EdBoxPremium.DatabaseModel.Student_ProfileData">
               <MappingFragment StoreEntitySet="Student_ProfileData">
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

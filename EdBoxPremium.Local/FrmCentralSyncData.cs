@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -37,9 +38,9 @@ namespace EdBoxPremium.Local
 
                 new Thread(() =>
                 {
-                    PullStudents();
                     PullCourses();
                     PullAcademicData();
+                    PullStudents();
                 }).Start();
             }
             catch (Exception exception)
@@ -52,7 +53,9 @@ namespace EdBoxPremium.Local
         {
             try
             {
-                var listOfStudentBatch = new List<List<Data.Student_ProfileData>>();
+                var listOfProfileData = new List<List<Data.Student_ProfileData>>();
+                var listOfAcademicData = new List<List<Student_RegistrationData>>();
+
                 var done = 0;
 
                 _consoleInfoData = "Starting Pull of Student Data";
@@ -70,7 +73,10 @@ namespace EdBoxPremium.Local
                         if (!batch.Any())
                             break;
 
-                        listOfStudentBatch.Add(batch.Select(x => x.StudentProfileData).ToList());
+                        listOfProfileData.Add(batch.Select(x => x.StudentProfileData).ToList());
+                        listOfAcademicData.Add(batch
+                            .Select(x => x.StudentData.FirstOrDefault()?.StudentRegistrationData).ToList());
+
                         done += batch.Count;
                         _consoleInfoData = $"Pulled Student Batch of {batch.Count}. Total Pulled is {done}";
                     }
@@ -81,29 +87,60 @@ namespace EdBoxPremium.Local
                     }
                 }
 
-                if (listOfStudentBatch.Any())
+                if (listOfProfileData.Any())
                 {
                     _consoleInfoData = @"Discarding all Previous Records";
                     DatabaseManager.ExecuteScripts("truncate table dbo.Student_ProfileData");
 
                     using (var data = new LocalEntities())
                     {
-                        foreach (var list in listOfStudentBatch)
+                        foreach (var list in listOfProfileData)
                         {
                             data.Student_ProfileData.AddRange(list.Select(innerList => new Student_ProfileData()
                             {
-                                MatricNumber = innerList.MatricNumber, 
-                                TagId = innerList.TagId, 
-                                IsDeleted = false, 
-                                Phone = innerList.Phone, 
-                                FirstName = innerList.FirstName, 
+                                MatricNumber = innerList.MatricNumber,
+                                TagId = innerList.TagId,
+                                IsDeleted = false,
+                                Phone = innerList.Phone,
+                                FirstName = innerList.FirstName,
                                 Email = innerList.Email,
-                                LastName = innerList.LastName, 
+                                LastName = innerList.LastName,
                                 Sex = innerList.Sex,
-                                Picture = innerList.Picture, 
-                                PictureEncoded = string.IsNullOrEmpty(innerList.Picture) ? null : Convert.FromBase64String(innerList.Picture),
-                                StudentProfileData = Newtonsoft.Json.JsonConvert.SerializeObject(innerList)
+                                Picture = innerList.Picture,
+                                BloodGroup = innerList.BloodGroup ?? "",
+                                PictureEncoded =
+                                    string.IsNullOrEmpty(innerList.Picture)
+                                        ? null
+                                        : Convert.FromBase64String(innerList.Picture),
+                                StudentProfileData = Newtonsoft.Json.JsonConvert.SerializeObject(innerList),
+                                RemoteId = innerList.Id
                             }));
+                            data.SaveChanges();
+                        }
+
+                        foreach (var acadBatch in listOfAcademicData)
+                        {
+                            foreach (var acad in acadBatch)
+                            {
+                                var profile =
+                                    data.Student_ProfileData.FirstOrDefault(x => x.RemoteId == acad.StudentId);
+
+                                if (profile == null)
+                                    continue;
+
+                                var school =
+                                    DatabaseManager.AcademicSetUpData.AcademicSetUpDatum.FirstOrDefault(x =>
+                                        x.SchoolSubSchool.Id == acad.SubSchoolId);
+
+                                if (school == null)
+                                    continue;
+
+                                profile.Program = school.SchoolSubSchool.SubSchoolName;
+                                profile.Department = school.SchoolSubSchoolDepartment
+                                    .FirstOrDefault(x => x.Id == acad.SubSchoolDepartmentId)?.SubSchoolDepartmentName;
+
+                                data.Entry(profile).State = EntityState.Modified;
+                            }
                             data.SaveChanges();
                         }
                     }

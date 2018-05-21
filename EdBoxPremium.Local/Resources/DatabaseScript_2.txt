@@ -124,13 +124,17 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Student_ProfileData](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
+    [RemoteId] INT DEFAULT ((0)) NOT NULL,
 	[MatricNumber] [varchar](100) NOT NULL,
+    [Department] VARCHAR (100) NULL,
+    [Program] VARCHAR (100) NULL,
 	[TagId] [varchar](100) NULL,
 	[FirstName] [varchar](100) NOT NULL,
 	[LastName] [varchar](100) NOT NULL,
 	[Sex] [varchar](10) NOT NULL,
 	[Phone] [varchar](20) NOT NULL,
 	[Email] [varchar](50) NULL,
+	[BloodGroup] [varchar](50) NULL,
 	[Picture] [varchar](max) NULL,
     [PictureEncoded] Image NULL,
 	[IsDeleted] [bit] NOT NULL,

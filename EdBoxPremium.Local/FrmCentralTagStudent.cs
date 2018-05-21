@@ -1,5 +1,6 @@
 ﻿using Codesistance.NFC;
 using System;
+using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -617,6 +618,20 @@ namespace EdBoxPremium.Local
                 var smartPoster = new RtdSmartPoster();
                 smartPoster.Title.Add(new RtdText(_studentData.StudentProfileData.MatricNumber, "US"));
                 Ndef ndefData = smartPoster;
+
+                using (var localEntities = new LocalEntities())
+                {
+                    var recordInDb =
+                        localEntities.Student_ProfileData.FirstOrDefault(x =>
+                            x.MatricNumber == txtStudentMatric.Text.Trim());
+
+                    if (recordInDb != null)
+                    {
+                        recordInDb.TagId = _tagUID;
+                        localEntities.Entry(recordInDb).State = EntityState.Modified;
+                        localEntities.SaveChanges();
+                    }
+                }
 
                 _tag.Content.Clear();
                 _tag.Content.Add(ndefData);

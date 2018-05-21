@@ -36,13 +36,17 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RemoteId" Type="int" Nullable="false" />
           <Property Name="MatricNumber" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Department" Type="varchar" MaxLength="100" />
+          <Property Name="Program" Type="varchar" MaxLength="100" />
           <Property Name="TagId" Type="varchar" MaxLength="100" />
           <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Sex" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
           <Property Name="Picture" Type="varchar(max)" />
           <Property Name="PictureEncoded" Type="image" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
@@ -116,6 +120,10 @@
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="StudentProfileData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PictureEncoded" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RemoteId" Type="Int32" Nullable="false" />
+          <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Program" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="System_Setting">
           <Key>
@@ -164,6 +172,10 @@
           <EntitySetMapping Name="Student_ProfileData">
             <EntityTypeMapping TypeName="EdboxDbModel.Student_ProfileData">
               <MappingFragment StoreEntitySet="Student_ProfileData">
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="RemoteId" ColumnName="RemoteId" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
                 <ScalarProperty Name="PictureEncoded" ColumnName="PictureEncoded" />
                 <ScalarProperty Name="StudentProfileData" ColumnName="StudentProfileData" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />

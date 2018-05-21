@@ -18,10 +18,10 @@ namespace EdBoxPremium.Web.Controllers
         {
             try
             {
-                var students = _entities.Student_ProfileData.Where(x => !x.IsDeleted && !string.IsNullOrEmpty(x.TagId))
+                var students = _entities.Student_ProfileData.Where(x => !x.IsDeleted)
                     .OrderBy(x => x.Id)
                     .Skip(done)
-                    .Take(100)
+                    .Take(50)
                     .ToList();
 
                 return Json(ResponseData.SendSuccessMsg(data: students), JsonRequestBehavior.AllowGet);
@@ -37,10 +37,10 @@ namespace EdBoxPremium.Web.Controllers
         {
             try
             {
-                var students = _entities.Student_ProfileData.Where(x => !x.IsDeleted && !string.IsNullOrEmpty(x.TagId))
+                var students = _entities.Student_ProfileData.Where(x => !x.IsDeleted)
                     .OrderBy(x => x.Id)
                     .Skip(done)
-                    .Take(100)
+                    .Take(50)
                     .ToList();
 
                 var studentData = students.Select(GetStudent).ToList();

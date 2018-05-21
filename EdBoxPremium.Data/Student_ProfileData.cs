@@ -24,5 +24,6 @@ namespace EdBoxPremium.Data
         public string Email { get; set; }
         public string Picture { get; set; }
         public bool IsDeleted { get; set; }
+        public string BloodGroup { get; set; }
     }
 }

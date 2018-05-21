@@ -7,8 +7,6 @@ using System.Linq;
 using System.Speech.Synthesis;
 using System.Threading;
 using System.Windows.Forms;
-using EdBoxPremium.Data;
-using EdBoxPremium.Data.InterchangeModels;
 using EdBoxPremium.Library;
 using EdBoxPremium.Library.Dictionary;
 using EdBoxPremium.Local.Engines;
@@ -117,32 +115,17 @@ namespace EdBoxPremium.Local
                 picBxStudentImage.Image = Resources.logo_only_128;
                 lblCurrentStudentName.Text = @"Waiting for Student";
                 lblCurrentStudentStatus.Text = @"Please Place a Tag";
+                picBxStudentImageDup.Image = Resources.logo_only_128;
+                picBxStudentImageDup.Visible = false;
                 return;
             }
 
             lblCurrentStudentName.Text = studentProfileData.LastName + @", " + studentProfileData.FirstName;
-            lblCurrentStudentStatus.Text = $"Sex: {studentProfileData.Sex} | Phone: {studentProfileData.Phone}\n";
-            lblCurrentStudentStatus.Text += $"Email: {studentProfileData.Email}\n";
-
-            var fullStudentData =
-                Newtonsoft.Json.JsonConvert.DeserializeObject<StudentCompleteData>(
-                    studentProfileData.StudentProfileData);
-
-            var academicData = fullStudentData?.StudentData?.FirstOrDefault() ?? new StudentData();
-
-            var regData = academicData.StudentRegistrationData ?? new Student_RegistrationData();
-
-            var subSchoolInfo =
-                DatabaseManager.AcademicSetUpData.AcademicSetUpDatum.FirstOrDefault(x =>
-                    x.SchoolSubSchool.Id == regData.SubSchoolId) ?? new AcademicSetUpDatum();
-
-            var subSchoolDepartment = subSchoolInfo.SchoolSubSchoolDepartment?.FirstOrDefault(x =>
-                                          x.Id == regData.SubSchoolDepartmentId) ??
-                                      new School_SubSchoolDepartment();
-
-            lblCurrentStudentStatus.Text +=
-                $"Faculty: {subSchoolInfo.SchoolSubSchool?.SubSchoolName ?? "[NA]"} \nDepartment: {subSchoolDepartment?.SubSchoolDepartmentName ?? "[NA]"}";
-
+            lblCurrentStudentStatus.Text = $"Program: {studentProfileData.Program} | Department: {studentProfileData.Department}\n";
+            lblCurrentStudentStatus.Text += $"Sex: {studentProfileData.Sex} | Blood Group: {studentProfileData.BloodGroup}\n";
+            
+            lblCurrentStudentStatus.Text += $"Phone: {studentProfileData.Phone} | Email: {studentProfileData.Email}";
+            
             if (string.IsNullOrEmpty(studentProfileData.Picture))
                 return;
 
@@ -400,16 +383,17 @@ namespace EdBoxPremium.Local
                             {
                                 var matricNumber = smart.Title.FirstOrDefault()?.Value ?? "";
                                 _studentData =
-                                    localEntities.Student_ProfileData.FirstOrDefault(x => x.MatricNumber == matricNumber && x.TagId == _tagUID);
+                                    localEntities.Student_ProfileData.FirstOrDefault(x =>
+                                        x.MatricNumber == matricNumber && x.TagId == _tagUID);
 
-                                msg = $"Processing Attendance for Matric Number {matricNumber}.";
-
-                                if (_studentData == null)
-                                    msg += " No Student Record was Found.";
+                                msg = _studentData == null
+                                    ? "No Student Record, Access Denied."
+                                    : $"{_studentData.FirstName} {_studentData.LastName}, Access Granted";
 
                                 var speak = new SpeechSynthesizer();
                                 speak.SpeakAsync(msg);
                             }
+
                             SuccessNotify("Awesome|" + msg);
                             break;
                         default:
@@ -499,7 +483,8 @@ namespace EdBoxPremium.Local
 
         private void picBxStudentImage_Click(object sender, EventArgs e)
         {
-
+            picBxStudentImageDup.Image = picBxStudentImage.Image;
+            picBxStudentImageDup.Visible = true;
         }
 
         private void tmrTime_Tick(object sender, EventArgs e)
@@ -527,6 +512,11 @@ namespace EdBoxPremium.Local
 
             lstTakenAttendance.Items.Add($"{_studentData.MatricNumber}: {_tagUID}");
             _studentData = null;
+        }
+
+        private void picBxStudentImageDup_Click(object sender, EventArgs e)
+        {
+            picBxStudentImageDup.Visible = false;
         }
     }
 }

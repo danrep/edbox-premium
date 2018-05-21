@@ -56,12 +56,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbCourse = new System.Windows.Forms.ComboBox();
             this.tmrTime = new System.Windows.Forms.Timer(this.components);
+            this.picBxStudentImageDup = new System.Windows.Forms.PictureBox();
             this.pnlHeader.SuspendLayout();
             this.grpBoxSettingsUpdate.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBxStudentImage)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBxStudentImageDup)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -133,7 +135,7 @@
             this.grpBoxSettingsUpdate.Size = new System.Drawing.Size(955, 336);
             this.grpBoxSettingsUpdate.TabIndex = 5;
             this.grpBoxSettingsUpdate.TabStop = false;
-            this.grpBoxSettingsUpdate.Text = "Student Information";
+            this.grpBoxSettingsUpdate.Text = "Student Information (click image to enlarge)";
             this.grpBoxSettingsUpdate.Enter += new System.EventHandler(this.grpBoxSettingsUpdate_Enter);
             // 
             // label4
@@ -246,7 +248,7 @@
             // 
             // lblCurrentStudentStatus
             // 
-            this.lblCurrentStudentStatus.Font = new System.Drawing.Font("Trebuchet MS", 10F);
+            this.lblCurrentStudentStatus.Font = new System.Drawing.Font("Trebuchet MS", 8F);
             this.lblCurrentStudentStatus.ForeColor = System.Drawing.Color.Gainsboro;
             this.lblCurrentStudentStatus.Location = new System.Drawing.Point(154, 51);
             this.lblCurrentStudentStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -370,15 +372,28 @@
             this.tmrTime.Interval = 1000;
             this.tmrTime.Tick += new System.EventHandler(this.tmrTime_Tick);
             // 
+            // picBxStudentImageDup
+            // 
+            this.picBxStudentImageDup.Image = global::EdBoxPremium.Local.Properties.Resources.logo_only_128;
+            this.picBxStudentImageDup.Location = new System.Drawing.Point(352, 116);
+            this.picBxStudentImageDup.Name = "picBxStudentImageDup";
+            this.picBxStudentImageDup.Size = new System.Drawing.Size(274, 356);
+            this.picBxStudentImageDup.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBxStudentImageDup.TabIndex = 14;
+            this.picBxStudentImageDup.TabStop = false;
+            this.picBxStudentImageDup.Visible = false;
+            this.picBxStudentImageDup.Click += new System.EventHandler(this.picBxStudentImageDup_Click);
+            // 
             // FrmCentralTakeAttendance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(980, 588);
-            this.Controls.Add(this.groupBox3);
+            this.ClientSize = new System.Drawing.Size(979, 588);
+            this.Controls.Add(this.picBxStudentImageDup);
             this.Controls.Add(this.grpBoxSettingsUpdate);
             this.Controls.Add(this.pnlHeader);
+            this.Controls.Add(this.groupBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -398,6 +413,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBxStudentImage)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBxStudentImageDup)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -430,5 +446,6 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer tmrTime;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox picBxStudentImageDup;
     }
 }

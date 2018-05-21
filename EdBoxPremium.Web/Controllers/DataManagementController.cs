@@ -292,8 +292,9 @@ namespace EdBoxPremium.Web.Controllers
                                     FirstName = names[0],
                                     LastName = names[1],
                                     Sex = dataRow[3].ToString().Trim(),
-                                    Phone = "NA",
-                                    Email = "NA",
+                                    BloodGroup = dataRow[5].ToString().Trim(),
+                                    Phone = dataRow[6].ToString().Trim(),
+                                    Email = dataRow[7].ToString().Trim(),
                                     IsDeleted = false,
                                 };
 
@@ -309,8 +310,9 @@ namespace EdBoxPremium.Web.Controllers
                                     studentData.FirstName = names[0];
                                     studentData.LastName = names[1];
                                     studentData.Sex = dataRow[3].ToString().Trim();
-                                    studentData.Phone = "NA";
-                                    studentData.Email = "NA";
+                                    studentData.Phone = dataRow[6].ToString().Trim();
+                                    studentData.Email = dataRow[7].ToString().Trim();
+                                    studentData.BloodGroup = dataRow[5].ToString().Trim();
 
                                     innerentities.Entry(studentData).State = EntityState.Modified;
                                     innerentities.SaveChanges();

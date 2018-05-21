@@ -57,8 +57,23 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="EdBoxPremium.Database.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\System_Setting.sql" />
+    <Build Include="dbo\Tables\Student_RegistrationData.sql" />
+    <Build Include="dbo\Tables\Student_ProfileData.sql" />
+    <Build Include="dbo\Tables\Student_CourseRegistration.sql" />
+    <Build Include="dbo\Tables\School_SubSchoolDepartment.sql" />
+    <Build Include="dbo\Tables\School_SubSchool.sql" />
+    <Build Include="dbo\Tables\School_Course.sql" />
+    <Build Include="dbo\Tables\School_AttendanceSession.sql" />
+    <Build Include="dbo\Tables\School_Attendance.sql" />
+    <Build Include="dbo\Tables\Administration_AccessCredentialRole.sql" />
+    <Build Include="dbo\Tables\Administration_AccessCredential.sql" />
   </ItemGroup>
 </Project>

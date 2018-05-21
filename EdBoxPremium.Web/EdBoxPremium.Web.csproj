@@ -1016,6 +1016,7 @@
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\DataManagement\Uploads.cshtml" />
+    <Content Include="Views\AttendanceManagement\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1027,7 +1028,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Assets\samplefiles\" />
     <Folder Include="DataFiles\" />
-    <Folder Include="Views\AttendanceManagement\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EdBoxPremium.Core\EdBoxPremium.Core.csproj">

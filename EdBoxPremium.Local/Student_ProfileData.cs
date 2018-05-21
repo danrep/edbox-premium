@@ -26,5 +26,9 @@ namespace EdBoxPremium.Local
         public bool IsDeleted { get; set; }
         public string StudentProfileData { get; set; }
         public byte[] PictureEncoded { get; set; }
+        public string BloodGroup { get; set; }
+        public int RemoteId { get; set; }
+        public string Department { get; set; }
+        public string Program { get; set; }
     }
 }
