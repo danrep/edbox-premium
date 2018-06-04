@@ -14,6 +14,11 @@ namespace EdBoxPremium.Web.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            //while (Convert.ToBoolean(ConfigurationManager.AppSettings["false"] ?? "true"))
+            //{
+            //    new Data.Entities().Database.Connection.OpenAsync();
+            //}
+
             var actionDesc = (ReflectedActionDescriptor)filterContext.ActionDescriptor;
 
             if (SecurityModel.IsUserSessionActive)

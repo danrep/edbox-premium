@@ -4,25 +4,45 @@
     Layout = "~/Views/Shared/_External.cshtml";
 }
 
-<div class="login-content">
-    <form class="margin-bottom-0">
-        <div class="form-group m-b-20">
-            <input type="text" id="username" class="form-control input-lg" placeholder="Email Address" required />
+<div class="login login-with-news-feed">
+    <div class="news-feed">
+        <div class="news-image">
+            <img src="/Assets/img/login-bg/app_background_1.jpg" data-id="login-cover-image" alt="" />
         </div>
-        <div class="form-group m-b-20">
-            <input type="password" id="password" class="form-control input-lg" placeholder="Password" required />
+        <div class="news-caption">
+            <h3 class="caption-title">
+                <img src="/Assets/img/EdBoxPremium/school_logo.png" alt="logo" width="100"/> FEDERAL COLLEGE OF EDUCATION, PANKSHIN
+                <small>STAFF SMARTCARD SERVER</small>
+            </h3>
         </div>
-        <div class="login-buttons">
-            <button type="button" onclick="logIn()" class="btn btn-success btn-block btn-lg">Sign me in</button>
+    </div>
+
+    <div class="right-content">
+        <div class="login-header">
+            <div class="brand text-white">
+                <img src="/Assets/img/EdBoxPremium/logo_only_128.png" width="100" alt="logo">
+                <small>EdboxPremium Enterprise School Data Management Platform</small>
+            </div>
         </div>
-        <hr />
-        <div class="m-t-20">
-            <h2 style="color: #51b74b">
-                <img src="/assets/img/EdBoxPremium/school_logo.png" width="120" alt="logo">
-            </h2>
-            <span>powered by Cloud Portal Limited</span>
+
+        <div class="login-content">
+            <form action="#" method="POST" class="margin-bottom-0">
+                <div class="form-group m-b-15">
+                    <input type="text" id="username" class="form-control input-lg" placeholder="Email Address" required />
+                </div>
+                <div class="form-group m-b-15">
+                    <input type="password" id="password" class="form-control input-lg" placeholder="Password" required />
+                </div>
+                <div class="login-buttons">
+                    <button type="button" onclick="logIn()" class="btn btn-success btn-block btn-lg">Sign me In</button>
+                </div>
+                <hr />
+                <p class="text-center">
+                    &copy; powered by Cloud Portal @DateTime.Now.Year
+                </p>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 
 <script>
