@@ -24,6 +24,26 @@
           <Property Name="PermissionId" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Administration_RegistrationSessionManifest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfManifest" Type="datetime" Nullable="false" />
+          <Property Name="RegistrationReaason" Type="int" Nullable="false" />
+          <Property Name="RegistrationDesc" Type="varchar(max)" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Administration_RegistrationSessionManifestItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationSessionManifestId" Type="int" Nullable="false" />
+          <Property Name="DateOfEntry" Type="datetime" Nullable="false" />
+          <Property Name="DataPayLoad" Type="varchar(max)" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="School_Attendance">
           <Key>
             <PropertyRef Name="Id" />
@@ -129,6 +149,8 @@
         <EntityContainer Name="EdBoxPremiumDatabaseModelStoreContainer">
           <EntitySet Name="Administration_AccessCredential" EntityType="Self.Administration_AccessCredential" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Administration_AccessCredentialRole" EntityType="Self.Administration_AccessCredentialRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Administration_RegistrationSessionManifest" EntityType="Self.Administration_RegistrationSessionManifest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Administration_RegistrationSessionManifestItems" EntityType="Self.Administration_RegistrationSessionManifestItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="School_Attendance" EntityType="Self.School_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="School_AttendanceSession" EntityType="Self.School_AttendanceSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="School_Course" EntityType="Self.School_Course" Schema="dbo" store:Type="Tables" />
@@ -155,6 +177,8 @@
           <EntitySet Name="Student_ProfileData" EntityType="EdBoxPremium.DatabaseModel.Student_ProfileData" />
           <EntitySet Name="School_Course" EntityType="EdBoxPremium.DatabaseModel.School_Course" />
           <EntitySet Name="Student_CourseRegistration" EntityType="EdBoxPremium.DatabaseModel.Student_CourseRegistration" />
+          <EntitySet Name="Administration_RegistrationSessionManifest" EntityType="EdBoxPremium.DatabaseModel.Administration_RegistrationSessionManifest" />
+          <EntitySet Name="Administration_RegistrationSessionManifestItems" EntityType="EdBoxPremium.DatabaseModel.Administration_RegistrationSessionManifestItems" />
         </EntityContainer>
         <EntityType Name="School_Attendance">
           <Key>
@@ -275,6 +299,26 @@
           <Property Name="SchoolIdId" Type="Int32" Nullable="false" />
           <Property Name="SubSchoolId" Type="Int32" Nullable="false" />
           <Property Name="SubSchoolDepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Administration_RegistrationSessionManifest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfManifest" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RegistrationReaason" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationDesc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Administration_RegistrationSessionManifestItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationSessionManifestId" Type="Int32" Nullable="false" />
+          <Property Name="DateOfEntry" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataPayLoad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
@@ -411,6 +455,28 @@
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="AcademicPeriodId" ColumnName="AcademicPeriodId" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Administration_RegistrationSessionManifest">
+            <EntityTypeMapping TypeName="EdBoxPremium.DatabaseModel.Administration_RegistrationSessionManifest">
+              <MappingFragment StoreEntitySet="Administration_RegistrationSessionManifest">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RegistrationDesc" ColumnName="RegistrationDesc" />
+                <ScalarProperty Name="RegistrationReaason" ColumnName="RegistrationReaason" />
+                <ScalarProperty Name="DateOfManifest" ColumnName="DateOfManifest" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Administration_RegistrationSessionManifestItems">
+            <EntityTypeMapping TypeName="EdBoxPremium.DatabaseModel.Administration_RegistrationSessionManifestItems">
+              <MappingFragment StoreEntitySet="Administration_RegistrationSessionManifestItems">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DataPayLoad" ColumnName="DataPayLoad" />
+                <ScalarProperty Name="DateOfEntry" ColumnName="DateOfEntry" />
+                <ScalarProperty Name="RegistrationSessionManifestId" ColumnName="RegistrationSessionManifestId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

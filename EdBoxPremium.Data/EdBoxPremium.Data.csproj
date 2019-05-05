@@ -55,6 +55,12 @@
     <Compile Include="Administration_AccessCredentialRole.cs">
       <DependentUpon>EdBoxPremium.tt</DependentUpon>
     </Compile>
+    <Compile Include="Administration_RegistrationSessionManifest.cs">
+      <DependentUpon>EdBoxPremium.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Administration_RegistrationSessionManifestItems.cs">
+      <DependentUpon>EdBoxPremium.tt</DependentUpon>
+    </Compile>
     <Compile Include="EdBoxPremium.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

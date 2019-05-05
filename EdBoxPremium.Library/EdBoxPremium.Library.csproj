@@ -43,6 +43,7 @@
     <Compile Include="Dictionary\EnumDescriptor.cs" />
     <Compile Include="Dictionary\EnumDictionary.cs" />
     <Compile Include="AttendanceReason.cs" />
+    <Compile Include="RegistrationReason.cs" />
     <Compile Include="RolePermissions.cs" />
     <Compile Include="SettingKey.cs" />
     <Compile Include="FileProcessingMethod.cs" />

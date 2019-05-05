@@ -1,0 +1,76 @@
+[ERROR>>EntityFramework] 4/24/2019 10:19:48 PM: [System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.Data.SqlClient.SqlException: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception: The system cannot find the file specified
+   --- End of inner exception stack trace ---
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCr
+[ERROR>>EntityFramework] 4/24/2019 11:54:33 PM: [System.NotSupportedException: LINQ to Entities does not recognize the method 'System.Object DeserializeObject[Object](System.String)' method, and this method cannot be translated into a store expression.
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.DefaultTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.NewTranslator.TypedTranslate(ExpressionConverter parent, NewExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input, DbExpressionBinding& binding)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, DbExpression& source, DbExpressionBinding& sourceBinding, DbExpression& lambda)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SelectTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SequenceMethodTranslator.Translate(ExpressionConverter parent
+[ERROR>>EntityFramework] 4/25/2019 7:14:49 AM: [System.NotSupportedException: LINQ to Entities does not recognize the method 'System.Object DeserializeObject[Object](System.String)' method, and this method cannot be translated into a store expression.
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.DefaultTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.NewTranslator.TypedTranslate(ExpressionConverter parent, NewExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input, DbExpressionBinding& binding)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, DbExpression& source, DbExpressionBinding& sourceBinding, DbExpression& lambda)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SelectTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SequenceMethodTranslator.Translate(ExpressionConverter parent
+[ERROR>>mscorlib] 4/25/2019 2:01:34 PM: [System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\Users\Arigbede Moses\Documents\Visual Studio 2017\Projects\EdBoxPremium\EdBoxPremium.Web\PassportPictureFiles\Identification Cards\1\45678903.png'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalWriteAllBytes(String path, Byte[] bytes, Boolean checkHost)
+   at System.IO.File.WriteAllBytes(String path, Byte[] bytes)
+   at EdBoxPremium.Web.Controllers.AdminRegistrationController.SaveRegistrationManifestItemIdCard(RegModelIdCard registrationModel, Int32 registrationManifest, Int32 itemId)]Could not find a part of the path 'C:\Users\Arigbede Moses\Documents\Visual Studio 2017\Projects\EdBoxPremium\EdBoxPremium.Web\PassportPictureFiles\Identification Cards\1\45678903.png'.
+[ERROR>>EntityFramework] 5/4/2019 7:33:27 PM: [System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.Data.SqlClient.SqlException: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception: The system cannot find the file specified
+   --- End of inner exception stack trace ---
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCr
+[ERROR>>EdBoxPremium.Core] 5/5/2019 7:26:37 PM: [System.NullReferenceException: Object reference not set to an instance of an object.
+   at EdBoxPremium.Core.ExcelWriter.GetRegistrationExcelRecordFile(String fileName, IReadOnlyList`1 headerRow, IEnumerable`1 excelRecords) in C:\Users\Arigbede Moses\Documents\Visual Studio 2017\Projects\EdBoxPremium\EdBoxPremium.Core\ExcelWriter.cs:line 35]Object reference not set to an instance of an object.
+[ERROR>>mscorlib] 5/5/2019 7:26:37 PM: [System.ArgumentNullException: Path cannot be null.
+Parameter name: path
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at EdBoxPremium.Web.Controllers.AdminRegistrationController.DataExportIdCard(Int32 registrationManifestId) in C:\Users\Arigbede Moses\Documents\Visual Studio 2017\Projects\EdBoxPremium\EdBoxPremium.Web\Controllers\AdminRegistrationController.cs:line 69]Path cannot be null.
+Parameter name: path
+[ERROR>>EdBoxPremium.Core] 5/5/2019 7:28:56 PM: [System.NullReferenceException: Object reference not set to an instance of an object.
+   at EdBoxPremium.Core.ExcelWriter.GetRegistrationExcelRecordFile(String fileName, IReadOnlyList`1 headerRow, IEnumerable`1 excelRecords) in C:\Users\Arigbede Moses\Documents\Visual Studio 2017\Projects\EdBoxPremium\EdBoxPremium.Core\ExcelWriter.cs:line 37]Object reference not set to an instance of an object.
+[ERROR>>EdBoxPremium.Core] 5/5/2019 7:29:43 PM: [System.NullReferenceException: Object reference not set to an instance of an object.
+   at EdBoxPremium.Core.ExcelWriter.GetRegistrationExcelRecordFile(String fileName, IReadOnlyList`1 headerRow, IEnumerable`1 excelRecords) in C:\Users\Arigbede Moses\Documents\Visual Studio 2017\Projects\EdBoxPremium\EdBoxPremium.Core\ExcelWriter.cs:line 37]Object reference not set to an instance of an object.
+[ERROR>>EdBoxPremium.Core] 5/5/2019 7:31:39 PM: [System.NullReferenceException: Object reference not set to an instance of an object.
+   at EdBoxPremium.Core.ExcelWriter.GetRegistrationExcelRecordFile(String fileName, IReadOnlyList`1 headerRow, IEnumerable`1 excelRecords)]Object reference not set to an instance of an object.
+[ERROR>>mscorlib] 5/5/2019 7:31:39 PM: [System.ArgumentNullException: Path cannot be null.
+Parameter name: path
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at EdBoxPremium.Web.Controllers.AdminRegistrationController.DataExportIdCard(Int32 registrationManifestId) in C:\Users\Arigbede Moses\Documents\Visual Studio 2017\Projects\EdBoxPremium\EdBoxPremium.Web\Controllers\AdminRegistrationController.cs:line 80]Path cannot be null.
+Parameter name: path
+[ERROR>>EdBoxPremium.Core] 5/5/2019 7:34:16 PM: [System.NullReferenceException: Object reference not set to an instance of an object.
+   at EdBoxPremium.Core.ExcelWriter.GetRegistrationExcelRecordFile(String fileName, IReadOnlyList`1 headerRow, IEnumerable`1 excelRecords)]Object reference not set to an instance of an object.
+[ERROR>>EdBoxPremium.Core] 5/5/2019 7:39:04 PM: [System.NullReferenceException: Object reference not set to an instance of an object.
+   at EdBoxPremium.Core.ExcelWriter.GetRegistrationExcelRecordFile(String fileName, IReadOnlyList`1 headerRow, IEnumerable`1 excelRecords)]Object reference not set to an instance of an object.

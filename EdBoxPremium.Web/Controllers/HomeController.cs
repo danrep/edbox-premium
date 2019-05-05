@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using EdBoxPremium.Core;
 using EdBoxPremium.Data.InterchangeModels;
@@ -35,7 +32,9 @@ namespace EdBoxPremium.Web.Controllers
                         "Your password is incorrect. Please try again or contact the Administrator"),
                     JsonRequestBehavior.AllowGet);
 
-            if (credential.AccessRoles.All(x => x.PermissionId != (int) RolePermissions.WebAdministrator))
+            if (credential.AccessRoles.Any(x =>
+                x.PermissionId == (int) RolePermissions.WebAdministrator ||
+                x.PermissionId == (int) RolePermissions.RegOpr) == false)
                 return Json(ResponseData.SendFailMsg("You are not authorised to use this Application"),
                     JsonRequestBehavior.AllowGet);
 

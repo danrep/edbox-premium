@@ -1,5 +1,4 @@
 ﻿@using System.Globalization
-@using EdBoxPremium.Library
 @using EdBoxPremium.Web.Models
 
 <!DOCTYPE html>
@@ -46,6 +45,10 @@
             font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
             font-weight: 100;
         }
+
+        .webCamResult {
+            margin: 5px;
+        }
     </style>
     @RenderSection("styles", false)
 </head>
@@ -84,71 +87,21 @@
                 </ul>
             </div>
         </div>
-        <div id="sidebar" class="sidebar">
-            <div data-scrollbar="true" data-height="100%">
-                <ul class="nav">
-                    <li class="has-sub">
-                        <a href="javascript:;">
-                            <h5 class="text text-white">MENU</h5>
-                        </a>
-                    </li>
-                </ul>
-                @if (SecurityModel.GetUserInSession.AccessRoles.FirstOrDefault(x => x.PermissionId == (int)RolePermissions.RegOpr) == null)
-                {
-                    <ul class="nav">
-                        <li class="has-sub">
-                            <a href="javascript:;">
-                                <b class="caret pull-right"></b>
-                                <i class="fa fa-graduation-cap"></i>
-                                <span>Student Management</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="active"><a href="@Url.Action("Index", "StudentManagement")">Overview</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav">
-                        <li class="has-sub">
-                            <a href="javascript:;">
-                                <b class="caret pull-right"></b>
-                                <i class="fa fa-database"></i>
-                                <span>Data Management</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="active"><a href="@Url.Action("Index", "DataManagement")">Overview</a></li>
-                                <li class="active"><a href="@Url.Action("Uploads", "DataManagement")">Data Upload</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                }
-                else
-                {
-                    <ul class="nav">
-                        <li class="has-sub">
-                            <a href="javascript:;">
-                                <b class="caret pull-right"></b>
-                                <i class="fa fa-edit"></i>
-                                <span>Admin Registration</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="active"><a href="@Url.Action("Index", "AdminRegistration" )">Overview</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                }
-            </div>
-        </div>
-        <div class="sidebar-bg"></div>
-        <div id="content" class="content" ng-app="edBoxWeb" ng-controller="edBoxWebCtrlr">
+
+        <div id="content" ng-app="edBoxWeb" ng-controller="edBoxWebCtrlr">
             <div class="row">
-                <h1 class="page-header">
-                    @ViewBag.Title
-                    <small>
-                        @ViewBag.TitleDesc
-                    </small>
-                </h1>
+                <div class="col-md-12">
+                    <div class="p-20">
+                        <h1 class="page-header">
+                            @ViewBag.Title
+                            <small>
+                                @ViewBag.TitleDesc
+                            </small>
+                        </h1>
+                        @RenderBody()
+                    </div>
+                </div>
             </div>
-            @RenderBody()
         </div>
         <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top">
             <i class="fa fa-angle-up"></i>

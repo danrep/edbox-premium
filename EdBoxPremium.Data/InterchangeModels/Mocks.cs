@@ -25,13 +25,15 @@ namespace EdBoxPremium.Data.InterchangeModels
                             PasswordData = Encryption.SaltEncrypt("accessentry", MockSalt),
                             PasswordSalt = MockSalt,
                             Username = "administrator@edboxpremium.com"
-                        }, 
-                        AccessRoles = EnumDictionary.GetList<RolePermissions>().ToList().Select(rp => new Administration_AccessCredentialRole()
-                        {
-                            CredentialId = 0,
-                            IsDeleted = false, 
-                            PermissionId = rp.ItemId
-                        }).ToList()
+                        },
+                        AccessRoles = EnumDictionary.GetList<RolePermissions>().ToList()
+                            .Where(x => x.ItemId != (int) RolePermissions.RegOpr).Select(rp =>
+                                new Administration_AccessCredentialRole()
+                                {
+                                    CredentialId = 0,
+                                    IsDeleted = false,
+                                    PermissionId = rp.ItemId
+                                }).ToList()
                     },
                     new AuthModel()
                     {
@@ -43,12 +45,14 @@ namespace EdBoxPremium.Data.InterchangeModels
                             PasswordSalt = MockSalt,
                             Username = "tagopr@edboxpremium.com"
                         },
-                        AccessRoles = EnumDictionary.GetList<RolePermissions>().ToList().Where(x => x.ItemId == (int)RolePermissions.TagOpr).Select(rp => new Administration_AccessCredentialRole()
-                        {
-                            CredentialId = 1,
-                            IsDeleted = false,
-                            PermissionId = rp.ItemId
-                        }).ToList()
+                        AccessRoles = EnumDictionary.GetList<RolePermissions>().ToList()
+                            .Where(x => x.ItemId == (int) RolePermissions.TagOpr).Select(rp =>
+                                new Administration_AccessCredentialRole()
+                                {
+                                    CredentialId = 1,
+                                    IsDeleted = false,
+                                    PermissionId = rp.ItemId
+                                }).ToList()
                     },
                     new AuthModel()
                     {
@@ -60,12 +64,33 @@ namespace EdBoxPremium.Data.InterchangeModels
                             PasswordSalt = MockSalt,
                             Username = "attendanceopr@edboxpremium.com"
                         },
-                        AccessRoles = EnumDictionary.GetList<RolePermissions>().ToList().Where(x => x.ItemId == (int)RolePermissions.AttendanceOpr).Select(rp => new Administration_AccessCredentialRole()
+                        AccessRoles = EnumDictionary.GetList<RolePermissions>().ToList()
+                            .Where(x => x.ItemId == (int) RolePermissions.AttendanceOpr).Select(rp =>
+                                new Administration_AccessCredentialRole()
+                                {
+                                    CredentialId = 2,
+                                    IsDeleted = false,
+                                    PermissionId = rp.ItemId
+                                }).ToList()
+                    },
+                    new AuthModel()
+                    {
+                        AccessCredential = new Administration_AccessCredential()
                         {
-                            CredentialId = 2,
+                            Id = 3,
                             IsDeleted = false,
-                            PermissionId = rp.ItemId
-                        }).ToList()
+                            PasswordData = Encryption.SaltEncrypt("regopr", MockSalt),
+                            PasswordSalt = MockSalt,
+                            Username = "registrationopr@edboxpremium.com"
+                        },
+                        AccessRoles = EnumDictionary.GetList<RolePermissions>().ToList()
+                            .Where(x => x.ItemId == (int) RolePermissions.RegOpr).Select(rp =>
+                                new Administration_AccessCredentialRole()
+                                {
+                                    CredentialId = 3,
+                                    IsDeleted = false,
+                                    PermissionId = rp.ItemId
+                                }).ToList()
                     }
                 }.ToList();
 

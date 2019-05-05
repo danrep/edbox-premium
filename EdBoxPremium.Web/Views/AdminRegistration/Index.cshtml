@@ -1,0 +1,158 @@
+﻿@using EdBoxPremium.Library
+@using EdBoxPremium.Library.Dictionary
+
+@{
+    ViewBag.Title = "Adminstrative Registrations";
+    ViewBag.TitleDesc = "Specialized Registration Portal";
+    Layout = "~/Views/Shared/_Internal.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3 col-xs-12">
+        <form class="form-horizontal" data-parsley-validate="true" name="demo-form" id="demo-form" action="javascript:iniNewRegRequest();">       
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                           data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                    <h4 class="panel-title"><i class="fa fa-cogs"></i>&nbsp;New Registration</h4>
+                </div>
+                <div class="panel-body bg-silver">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label" for="regModel">Registration Model * :</label>
+                            <select class="form-control" id="regModel" name="regModel"  
+                                    data-parsley-required="true"
+                                    data-parsley-required-message="You must select at least one option.">
+                                <option value="">Please Select a Model</option>
+                                @foreach (var item in EnumDictionary.GetList<RegistrationReason>().ToList())
+                                {
+                                    <option value="@item.ItemId">@item.ItemName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label class="control-label" for="regDesc">Registration Description * :</label>
+                            <input class="form-control" type="text" id="regDesc" name="regDesc"
+                                   placeholder="Registration Description" data-parsley-required="true"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="submit" class="btn btn-sm btn-block btn-success">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-9 col-xs-12">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                       data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title"><i class="fa fa-user-o"></i>&nbsp;Configured Manifests</h4>
+            </div>
+            <div class="panel-body">
+                <table id="data-table" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Registration Description</th>
+                            <th>Date Of Manifest</th>
+                            <th>Registration Model</th>
+                            <th>Current Count</th>
+                            <th>...</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            pageLoad();
+        });
+
+        edBoxWeb.controller('edBoxWebCtrlr',
+            function($scope) {
+            });
+
+        function pageLoad() {
+            loadTableRequest();
+        };
+
+        function resetForm() {
+            $('#regModel').val(0);
+            $('#regDesc').val('');
+
+            loadTableRequest();
+        }
+
+        function iniNewRegRequest() {
+            window.swalInfo('Processing... Please Wait');
+
+            window.api("POST",
+                "@Url.Action("SaveRegistrationManifests", "AdminRegistration")",
+                {
+                    registrationModel: $('#regModel').val(),
+                    desc: $('#regDesc').val()
+                },
+                true,
+                iniNewRegResponse);
+        };
+
+        function iniNewRegResponse(data) {
+            window.location = '@Url.Action("Register", "AdminRegistration")?registrationManifestId=' + data.Manifest.Id;
+        };
+
+        function loadTableRequest() {
+            window.swalInfo('Processing... Please Wait');
+
+            window.api("GET",
+                "@Url.Action("GetAllRegistrationManifests", "AdminRegistration")",
+                null,
+                true,
+                loadTableResponse);
+        };
+
+        function loadTableResponse(data) {
+            if (data === null)
+                return;
+
+            if (typeof data === 'undefined')
+                return;
+
+            window.resetDataTable($("#data-table"));
+
+            $.each(data,
+                function(i, datum) {
+                    var rowData =
+                        '<tr><td><a class="text text-primary text-xs" target="_blank" href="@Url.Action("Register", "AdminRegistration")?registrationManifestId=' +
+                            datum.Id +
+                            '"><b>' +
+                        datum.RegistrationDesc +
+                            '</b></a></td>';
+                    rowData += '<td>' + datum.DateOfManifest + '</td>';
+                    rowData += '<td>' + datum.RegistrationReaasonDesc + '</td>';
+                    rowData += '<td>' + datum.CurrentCount + '</td>';
+                    rowData += '<td><a href="@Url.Action("DataExportIdCard", "AdminRegistration")?registrationManifestId=' + datum.Id+'" class="btn btn-xs btn-info">Export</a></td>';
+
+                    rowData += '</tr>';
+
+                    $("#data-table tbody").append(rowData);
+                });
+
+            window.reInitializeTable($('#data-table'));
+        }
+    </script>
+}

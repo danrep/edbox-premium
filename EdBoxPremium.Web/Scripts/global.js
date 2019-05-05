@@ -234,6 +234,7 @@ function swalEngineNoCallBack(title, message, type, buttonClass, showConfirmButt
         timer: 5000
     });
 };
+
 function swalEngineCallBack(title, message, type, buttonClass, callback) {
     swal({
         title: title,

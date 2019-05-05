@@ -13,6 +13,8 @@ namespace EdBoxPremium.Library
         [EnumDisplayName(DisplayName = "Verification Operative")]
         VerificationOpr,
         [EnumDisplayName(DisplayName = "Tag Operative")]
-        TagOpr
+        TagOpr,
+        [EnumDisplayName(DisplayName = "Registration Operative")]
+        RegOpr
     }
 }

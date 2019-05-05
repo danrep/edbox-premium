@@ -1,0 +1,329 @@
+﻿@using EdBoxPremium.Data
+@using EdBoxPremium.Library
+@using EdBoxPremium.Library.Dictionary
+@model EdBoxPremium.Data.Administration_RegistrationSessionManifest
+
+@{
+    ViewBag.Title = "Register";
+    ViewBag.TitleDesc = "Specialized Registration Portal (" + ((RegistrationReason)Model.RegistrationReaason).DisplayName() + ")";
+    Layout = "~/Views/Shared/_InternalNoMenu.cshtml";
+
+    var schools = new List<string>();
+    using (var entites = new Entities())
+    {
+        schools = entites.School_SubSchoolDepartment.Where(x => !x.IsDeleted).Select(x => x.SubSchoolDepartmentName).Distinct().ToList();
+    }
+}
+
+<div class="row">
+    <div class="col-md-4 col-xs-12">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title"><i class="fa fa-cogs"></i>&nbsp;Completed Registrations</h4>
+            </div>
+            <div class="panel-body bg-silver">
+                <table id="completedRegistrations" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Registrants</th>
+                            <th>...</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-xs-12">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title"><i class="fa fa-cogs"></i>&nbsp;New Registration</h4>
+            </div>
+            <div class="panel-body bg-white">
+                @if (Model.RegistrationReaason == (int)RegistrationReason.IdCard)
+                {
+                    <form class="form-horizontal" data-parsley-validate="true" name="demo-form" id="demo-form" action="javascript:postIdCardRequest();">
+                        <div class="panel panel-inverse">
+                            <div class="panel-heading">
+                                <div class="panel-heading-btn">
+                                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                </div>
+                                <h4 class="panel-title"><i class="fa fa-picture-o"></i>&nbsp;Image Capture</h4>
+                            </div>
+                            <div class="panel-body bg-black-lighter">
+                                <button type="button" class="btn btn-sm btn-success pull-right" onClick="takeSnapshot()">Capture Image</button>
+                            </div>
+                            <div class="panel-body bg-silver">
+                                <div class="bg-info pull-left">
+                                    <div class="webCamResult" id="camera"></div>
+                                </div>
+                                <div class="bg-success pull-right">
+                                    <div class="webCamResult" id="result">
+                                        <label class="label label-success">Waiting for Capture</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12">
+                                <label class="control-label" for="fullName">Full Name * :</label>
+                                <input class="form-control" type="text" id="fullName" name="fullName"
+                                       placeholder="Full Name" data-parsley-required="true" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-12">
+                                <label class="control-label" for="matricNumber">Matric Number * :</label>
+                                <input type="text" class="form-control" id="matricNumber" name="matricNumber"
+                                       placeholder="Matriculation Number" data-parsley-required="true">
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label class="control-label" for="school">School * :</label>
+                                <select class="form-control" id="school" name="school"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="You must select at least one option.">
+                                    <option value="">Please Select a School</option>
+                                    @foreach (var school in schools)
+                                    {
+                                        <option value="@school.ToUpper()">@school.ToUpper()</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-12">
+                                <label class="control-label" for="phoneNumber">Phone Number * :</label>
+                                <input class="form-control" type="text" id="phoneNumber" name="phoneNumber"
+                                       placeholder="Phone Number" data-parsley-required="true" />
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label class="control-label" for="email">Email * :</label>
+                                <input class="form-control" type="text" id="email" name="email"
+                                       placeholder="Email" data-parsley-required="true" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-12">
+                                <label class="control-label" for="sex">Sex * :</label>
+                                <select class="form-control" id="sex" name="sex"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="You must select at least one option.">
+                                    <option value="">Please Select a Sex</option>
+                                    <option value="M">M</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <label class="control-label" for="bloodGroup">Blood Group * :</label>
+                                <select class="form-control" id="bloodGroup" name="bloodGroup"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="You must select at least one option.">
+                                    <option value="">Please Select a Blood Group</option>
+                                    <option value="A-">A-</option>
+                                    <option value="A+">A+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="AB+">AB+</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <label class="control-label" for="program">Program * :</label>
+                                <select class="form-control" id="program" name="program"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="You must select at least one option.">
+                                    <option value="">Please Select a Program</option>
+                                    <option value="NCE">NCE</option>
+                                    <option value="Degree">Degree</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                                <button type="button" class="btn btn-sm btn-info" onclick="reloadIdCardForm()">Clear</button>
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript" src="/Scripts/webcam.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            pageLoad();
+
+            Webcam.set({
+                width: 320,
+                height: 240,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+            Webcam.attach('#camera');
+        });
+
+        edBoxWeb.controller('edBoxWebCtrlr',
+            function($scope) {
+            });
+
+        function pageLoad() {
+            loadTableRequest();
+        }
+
+        function loadTableRequest() {
+            window.swalInfo('Processing... Please Wait');
+
+            window.api("GET",
+                "@Url.Action("GetAllRegistrationManifestItems", "AdminRegistration")?registrationSessionManifestId=@Model.Id",
+                null,
+                true,
+                loadTableResponse);
+        };
+
+        function loadTableResponse(data) {
+            if (data === null)
+                return;
+
+            window.resetDataTable($("#completedRegistrations"));
+
+            if (data.RegistrationReaason === @((int) RegistrationReason.IdCard)) {
+                $.each(data.DataSet,
+                    function(i, datum) {
+                        var rowData =
+                            '<tr><td><a href="#" class="text text-primary text-xs" onclick="loadIdCardRegistrantRequest(' +
+                                datum.Id +
+                            ')"><b>' + datum.PayLoad.MatricNumber + '| ' +
+                                datum.PayLoad.FullName +
+                            '</b></a></td>';
+
+                        rowData += '<td><a href="#" class="text text-danger text-xs" onclick="deleteItemRequest(' +
+                            datum.Id +
+                            ')">Remove</a></td>';
+
+                        rowData += '</tr>';
+
+                        $("#completedRegistrations tbody").append(rowData);
+                    });
+            }
+
+            window.reInitializeTable($('#completedRegistrations'));
+        }
+
+        function deleteItemRequest(registrantId) {
+            window.swalWarningConfirm(function() {
+                deleteItemConfirm(registrantId);
+            });
+        }
+
+        function deleteItemConfirm(registrantId) {
+            window.api("GET",
+                "@Url.Action("DeleteItem", "AdminRegistration")?itemId=" + registrantId,
+                null,
+                true,
+                deleteItemResponse);
+        }
+
+        function deleteItemResponse(data) {
+            reloadIdCardForm();
+            loadTableRequest();
+        }
+
+        function loadIdCardRegistrantRequest(registrantId) {
+            window.api("GET",
+                "@Url.Action("GetAllRegistrationManifestItem", "AdminRegistration")?registrationSessionManifestId=@Model.Id&itemId=" + registrantId,
+                null,
+                true,
+                loadIdCardRegistrantResponse);
+        }
+
+        function loadIdCardRegistrantResponse(data) {
+            $('#matricNumber').val(data.DataSet.MatricNumber);
+            $('#fullName').val(data.DataSet.FullName);
+            $('#school').val(data.DataSet.School);
+            $('#sex').val(data.DataSet.Sex);
+            $('#program').val(data.DataSet.Program);
+            $('#bloodGroup').val(data.DataSet.BloodGroup);
+            $('#email').val(data.DataSet.Email);
+            $('#phoneNumber').val(data.DataSet.PhoneNumber);
+            document.getElementById('result').innerHTML = '<img id="resultViewPort" src="' + data.DataSet.Picture + '"/>';
+        }
+
+        function postIdCardRequest() {
+            var image = $('#resultViewPort').attr('src');
+
+            if (typeof image === 'undefined') {
+                window.swalWarning('Please take a Picture first!');
+                return;
+            }
+
+            var base64ImageContent = image.replace(/^data:image\/(png|jpg);base64,/, '');
+
+            if (base64ImageContent === '') {
+                window.swalWarning('Please take a Picture first!');
+                return;
+            }
+
+            window.swalInfo('Processing... Please Wait');
+
+            window.api("POST",
+                "@Url.Action("SaveRegistrationManifestItemIdCard", "AdminRegistration")",
+                {
+                    RegistrationModel: {
+                        'FullName': $('#fullName').val().toUpperCase(),
+                        'MatricNumber': $('#matricNumber').val().toUpperCase(),
+                        'School': $('#school').val().toUpperCase(),
+                        'PhoneNumber': $('#phoneNumber').val().toUpperCase(),
+                        'Email': $('#email').val().toUpperCase(),
+                        'Sex': $('#sex').val(),
+                        'BloodGroup': $('#bloodGroup').val(),
+                        'Program': $('#program').val().toUpperCase(),
+                        'Picture': base64ImageContent
+                    },
+                    RegistrationManifest: '@Model.Id'
+                },
+                true,
+                postIdCardResponse);
+        }
+
+        function postIdCardResponse() {
+            window.swalInfo($('#fullName').val() + " has been Registered!");
+            reloadIdCardForm();
+            loadTableRequest();
+        }
+
+        function reloadIdCardForm() {
+            $('#fullName').val('');
+            $('#matricNumber').val('');
+            $('#school').val('');
+            $('#phoneNumber').val('');
+            $('#email').val('');
+            $('#sex').val(0);
+            $('#bloodGroup').val(0);
+            $('#program').val(0);
+
+            document.getElementById('result').innerHTML = '<label class="label label-success">Waiting for Capture</label>';
+        }
+
+        function takeSnapshot() {
+            Webcam.snap(function(data_uri) {
+                document.getElementById('result').innerHTML = '<img id="resultViewPort" src="' + data_uri + '"/>';
+            });
+        }
+    </script>
+}

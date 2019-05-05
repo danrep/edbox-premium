@@ -36,5 +36,7 @@ namespace EdBoxPremium.Data
         public virtual DbSet<Student_ProfileData> Student_ProfileData { get; set; }
         public virtual DbSet<School_Course> School_Course { get; set; }
         public virtual DbSet<Student_CourseRegistration> Student_CourseRegistration { get; set; }
+        public virtual DbSet<Administration_RegistrationSessionManifest> Administration_RegistrationSessionManifest { get; set; }
+        public virtual DbSet<Administration_RegistrationSessionManifestItems> Administration_RegistrationSessionManifestItems { get; set; }
     }
 }
