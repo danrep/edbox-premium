@@ -228,7 +228,11 @@ namespace EdBoxPremium.Web.Controllers
                         {
                             x.Id,
                             DateOfEntry = $"{x.DateOfEntry:yyyyMMdd}",
-                            PayLoad = Newtonsoft.Json.JsonConvert.DeserializeObject<RegModelIdCard>(x.DataPayLoad)
+                            PayLoad = new
+                            {
+                                Newtonsoft.Json.JsonConvert.DeserializeObject<RegModelIdCard>(x.DataPayLoad).MatricNumber,
+                                Newtonsoft.Json.JsonConvert.DeserializeObject<RegModelIdCard>(x.DataPayLoad).FullName
+                            }
                         }));
 
                     return Json(
