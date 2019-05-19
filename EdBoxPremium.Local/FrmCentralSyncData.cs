@@ -94,8 +94,10 @@ namespace EdBoxPremium.Local
 
                     using (var data = new LocalEntities())
                     {
+                        _consoleInfoData = @" Persisting Student Profile Data";
                         foreach (var list in listOfProfileData)
                         {
+                            _consoleInfoData = @"Processing ...";
                             data.Student_ProfileData.AddRange(list.Select(innerList => new Student_ProfileData()
                             {
                                 MatricNumber = innerList.MatricNumber,
@@ -117,9 +119,12 @@ namespace EdBoxPremium.Local
                             }));
                             data.SaveChanges();
                         }
+                        _consoleInfoData = @"Student Profile Data Persistence Successful";
 
+                        _consoleInfoData = @"Persisting Student Academic Data";
                         foreach (var acadBatch in listOfAcademicData)
                         {
+                            _consoleInfoData = @"Processing ...";
                             foreach (var acad in acadBatch)
                             {
                                 var profile =
@@ -143,6 +148,7 @@ namespace EdBoxPremium.Local
                             }
                             data.SaveChanges();
                         }
+                        _consoleInfoData = @"Student Academic Data Persistence Successful";
                     }
                     _consoleInfoData = @"Completed Pull of Student Data";
                 }
@@ -222,6 +228,7 @@ namespace EdBoxPremium.Local
             
             rTxtBox.AppendText($"{DateTime.Now:yyyyMMddHHmmssfff}: {_consoleInfoData}\n");
             _consoleInfoData = null;
+            rTxtBox.ScrollToCaret();
         }
     }
 }

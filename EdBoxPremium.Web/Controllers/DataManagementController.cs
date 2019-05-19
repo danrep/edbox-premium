@@ -181,6 +181,8 @@ namespace EdBoxPremium.Web.Controllers
                             innerentities.Student_ProfileData.FirstOrDefault(
                                 x => !x.IsDeleted && x.MatricNumber == matricNumber);
 
+                        dataRow[4] = dataRow[4].ToString().Split('/')[0].Trim();
+
                         try
                         {
                             if (forceReplace)
