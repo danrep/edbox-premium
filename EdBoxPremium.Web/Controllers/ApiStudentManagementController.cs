@@ -141,6 +141,13 @@ namespace EdBoxPremium.Web.Controllers
                 var location = System.Web.Hosting.HostingEnvironment.MapPath("~/PassportPictureFiles/Students") ?? "";
                 var pictureFileInfo = new FileInfo(Path.Combine(location, $"{CleanDataForFileName(studentProfileData.MatricNumber)}.jpg"));
 
+                if (!pictureFileInfo.Exists)
+                    pictureFileInfo = new FileInfo(Path.Combine(location, studentProfileData.MatricNumber
+                                                                              .Replace("-", "0")
+                                                                              .Replace("_", "0")
+                                                                              .Replace("/", "0")
+                                                                              .Replace("\\", "0") + ".png"));
+
                 if (pictureFileInfo.Exists)
                     studentProfileData.Picture =
                         Convert.ToBase64String(System.IO.File.ReadAllBytes(pictureFileInfo.FullName));
