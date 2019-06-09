@@ -40,7 +40,7 @@ namespace EdBoxPremium.Web.Controllers
                 var students = _entities.Student_ProfileData.Where(x => !x.IsDeleted)
                     .OrderBy(x => x.Id)
                     .Skip(done)
-                    .Take(50)
+                    .Take(20)
                     .ToList();
 
                 var studentData = students.Select(GetStudent).ToList();
